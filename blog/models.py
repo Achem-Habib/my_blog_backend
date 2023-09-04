@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.utils.text import slugify
 
@@ -19,15 +20,19 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
     image = models.ImageField(upload_to="images/")
-    table_of_contents = models.TextField()
     summary = models.TextField()
     date = models.DateField()
-    body = models.TextField()
     published = models.BooleanField(default=False)
-    most_popular = models.BooleanField(default=False)
+    table_of_contents = models.TextField()
+    body = models.TextField()
+
+
+class Subscriber(models.Model):
+    email = models.EmailField()
+    date_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["-date"]
+        ordering = ["-date_time"]
 
     def __str__(self):
-        return self.title
+        return self.email
